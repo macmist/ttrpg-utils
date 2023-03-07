@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 
-type Point = {
+export type Point = {
     x: number,
     y: number,
     color: string
@@ -16,7 +16,6 @@ const MapRenderer = (props: MapRendererProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     function drawPixel(context: CanvasRenderingContext2D, x: number, y: number, color: string) {
-        console.log(x, y, color)
         context.fillStyle = color;
         context.fillRect(x, y, 1, 1);
     }

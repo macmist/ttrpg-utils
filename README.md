@@ -19,3 +19,7 @@ in my Software Engineering skills.
 It's at a very early stage at the moment, but you can follow progress and ideas here:
 
 https://trello.com/b/WSuICqBG/ttrpg-utils
+
+
+## Usage
+`$ yarn && yart start`
