@@ -20,6 +20,8 @@ It's at a very early stage at the moment, but you can follow progress and ideas 
 
 https://trello.com/b/WSuICqBG/ttrpg-utils
 
+Latest update: Map generator with size selector. UI in progress
+![](./screenshots/Screenshot 2023-03-08 at 16.56.38.png)
 
 ## Usage
 `$ yarn && yart start`
