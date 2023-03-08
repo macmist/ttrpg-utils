@@ -9,8 +9,8 @@ node {
      def myContainer = docker.image('node')
      myContainer.pull()
      myContainer.inside  {
-       sh 'npm install'
-       sh 'npm test'
+       sh 'yarn'
+       sh 'yarn test'
      }
    }
    stage('docker build/push') {

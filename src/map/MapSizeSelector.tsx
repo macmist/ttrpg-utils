@@ -22,7 +22,7 @@ const MapSizeSelector = (props: MapSizeSelectorProps) => {
         {range(1, 10, 1).map((x) => {
           const size = Math.pow(2, x) + 1;
           return (
-            <option value={x}>
+            <option value={x} key={x}>
               {size}px * {size}px
             </option>
           );
