@@ -45,6 +45,10 @@ const MapRenderer = (props: MapRendererProps) => {
   };
 
   useEffect(() => {
+    console.log("height updat");
+  }, [heightColors]);
+
+  useEffect(() => {
     console.log("points updated");
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
@@ -57,7 +61,7 @@ const MapRenderer = (props: MapRendererProps) => {
         });
       }
     }
-  }, [points]);
+  }, [points, heightColors]);
   return (
     <canvas
       ref={canvasRef}
