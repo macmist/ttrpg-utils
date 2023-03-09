@@ -19,7 +19,7 @@ const MapSizeSelector = (props: MapSizeSelectorProps) => {
         onChange={(e) => setValue(Number.parseInt(e.target.value))}
         defaultValue={value}
       >
-        {range(1, 10, 1).map((x) => {
+        {range(5, 12, 1).map((x) => {
           const size = Math.pow(2, x) + 1;
           return (
             <option value={x} key={x}>

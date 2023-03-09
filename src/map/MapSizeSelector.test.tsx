@@ -20,5 +20,5 @@ it("calls onRegenerate when button is clicked", () => {
   user.click(button);
 
   expect(mock).toHaveBeenCalled();
-  expect(mock).toHaveBeenCalledWith(1);
+  expect(mock).toHaveBeenCalledWith(5);
 });

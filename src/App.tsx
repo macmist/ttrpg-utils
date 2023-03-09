@@ -38,14 +38,14 @@ function App() {
   };
 
   return (
-    <Container fluid>
+    <Container>
       <Row>
         <Col>
           <MapSizeSelector onRegenerate={(n) => regenerate(n)} />
         </Col>
       </Row>
       <Row className="justify-content-md-center">
-        <Col xs={8} style={{ overflow: "auto" }}>
+        <Col xs={7} style={{ overflow: "auto" }}>
           <MapRenderer
             width={dimension}
             height={dimension}
@@ -53,7 +53,7 @@ function App() {
             heightColors={heights}
           />
         </Col>
-        <Col xs={4}>
+        <Col xs={5}>
           <MapRangeHeightCreator
             heightColors={heights}
             onSave={(ranges) => setHeights(ranges)}

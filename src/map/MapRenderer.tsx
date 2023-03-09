@@ -27,22 +27,28 @@ const MapRenderer = (props: MapRendererProps) => {
     );
   };
 
-  const findHeightColor = (height: number) => {
-    const gray = (height * 100 * 255) / 100;
-    const defaultColor = toHex(gray, gray, gray);
-    if (!heightColors) {
+  const findHeightColor = useCallback(
+    (height: number) => {
+      const gray = (height * 100 * 255) / 100;
+      const defaultColor = toHex(gray, gray, gray);
+      if (!heightColors) {
+        return defaultColor;
+      }
+      for (const range of heightColors)
+        if (height >= range.low && height <= range.high) return range.color;
+
       return defaultColor;
-    }
-    for (const range of heightColors)
-      if (height >= range.low && height <= range.high) return range.color;
+    },
+    [heightColors]
+  );
 
-    return defaultColor;
-  };
-
-  const drawPixel = (context: CanvasRenderingContext2D, p: Point) => {
-    context.fillStyle = findHeightColor(p.height);
-    context.fillRect(p.x, p.y, 1, 1);
-  };
+  const drawPixel = useCallback(
+    (context: CanvasRenderingContext2D, p: Point) => {
+      context.fillStyle = findHeightColor(p.height);
+      context.fillRect(p.x, p.y, 1, 1);
+    },
+    [findHeightColor]
+  );
 
   useEffect(() => {}, [heightColors]);
 
@@ -58,7 +64,7 @@ const MapRenderer = (props: MapRendererProps) => {
         });
       }
     }
-  }, [points, heightColors]);
+  }, [points, heightColors, drawPixel]);
   const download = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
