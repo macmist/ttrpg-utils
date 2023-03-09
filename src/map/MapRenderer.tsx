@@ -44,12 +44,9 @@ const MapRenderer = (props: MapRendererProps) => {
     context.fillRect(p.x, p.y, 1, 1);
   };
 
-  useEffect(() => {
-    console.log("height updat");
-  }, [heightColors]);
+  useEffect(() => {}, [heightColors]);
 
   useEffect(() => {
-    console.log("points updated");
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
     if (ctx) {
@@ -62,12 +59,28 @@ const MapRenderer = (props: MapRendererProps) => {
       }
     }
   }, [points, heightColors]);
+  const download = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+
+    if (ctx && canvas) {
+      let canvasUrl = canvas.toDataURL();
+      const createEl = document.createElement("a");
+      createEl.href = canvasUrl;
+      createEl.download = "map";
+      createEl.click();
+      createEl.remove();
+    }
+  };
   return (
-    <canvas
-      ref={canvasRef}
-      width={width || 200}
-      height={height || 200}
-    ></canvas>
+    <>
+      <canvas
+        ref={canvasRef}
+        width={width || 200}
+        height={height || 200}
+      ></canvas>
+      <button onClick={download}>Download</button>
+    </>
   );
 };
 

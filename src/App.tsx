@@ -3,8 +3,8 @@ import MapRenderer, { RangeColor } from "./map/MapRenderer";
 import { DiamondSquare } from "./utils/diamondSquare";
 import { Point } from "./lib/types";
 import MapSizeSelector from "./map/MapSizeSelector";
-import Spinner from "react-bootstrap/Spinner";
 import MapRangeHeightCreator from "./map/MapRangeHeightCreator";
+import { Col, Container, Row } from "react-bootstrap";
 
 function App() {
   const [points, setPoints] = useState<Array<Point>>([]);
@@ -38,20 +38,29 @@ function App() {
   };
 
   return (
-    <>
-      <MapSizeSelector onRegenerate={(n) => regenerate(n)} />
-      <MapRangeHeightCreator
-        heightColors={heights}
-        onSave={(ranges) => setHeights(ranges)}
-      />
-      {generating && <Spinner />}
-      <MapRenderer
-        width={dimension}
-        height={dimension}
-        points={points}
-        heightColors={heights}
-      />
-    </>
+    <Container fluid>
+      <Row>
+        <Col>
+          <MapSizeSelector onRegenerate={(n) => regenerate(n)} />
+        </Col>
+      </Row>
+      <Row className="justify-content-md-center">
+        <Col xs={8} style={{ overflow: "auto" }}>
+          <MapRenderer
+            width={dimension}
+            height={dimension}
+            points={points}
+            heightColors={heights}
+          />
+        </Col>
+        <Col xs={4}>
+          <MapRangeHeightCreator
+            heightColors={heights}
+            onSave={(ranges) => setHeights(ranges)}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
