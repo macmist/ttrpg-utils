@@ -1,6 +1,15 @@
 import { RangeColor } from "./MapRenderer";
 import { useState } from "react";
-import { Col, FloatingLabel, Form, Row, Table } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  FloatingLabel,
+  Form,
+  OverlayTrigger,
+  Popover,
+  Row,
+  Table,
+} from "react-bootstrap";
 import ColorPickerModal from "./ColorPickerModal";
 import "./map.css";
 
@@ -40,16 +49,39 @@ const MapRangeHeightCreator = (props: MapRangeHeightCreatorProps) => {
     });
     setRanges(newRanges);
   };
+
+  const help = (
+    <Popover id="height-help">
+      <Popover.Header as="h3">Color ranges</Popover.Header>
+      <Popover.Body>
+        Each pixel on the map has a height between 0 and 100. Use the table
+        below to assign a color to a specific range of height. For instance, the
+        first row assigns a dark blue color to all points with a height between
+        0 and 10.
+        <br />
+        You can edit each range however you want.
+        <br />
+        Click the "Add Row" button to add a new row.
+        <br />
+        Click the "Save" button once done to update the map.
+      </Popover.Body>
+    </Popover>
+  );
+
   return (
     <div className="mapHeightContainer">
+      <Row className="align-items-center">
+        <Col>
+          <h1>Color ranges</h1>
+        </Col>
+        <Col>
+          <OverlayTrigger trigger="click" placement={"auto"} overlay={help}>
+            <Button variant="outline-info">Help</Button>
+          </OverlayTrigger>
+        </Col>
+      </Row>
+
       <Table size="sm">
-        <thead>
-          <tr>
-            <th>Low</th>
-            <th>High</th>
-            <th>Color</th>
-          </tr>
-        </thead>
         <tbody>
           {ranges &&
             ranges.map((range, index) => {
@@ -120,8 +152,10 @@ const MapRangeHeightCreator = (props: MapRangeHeightCreatorProps) => {
         </tbody>
       </Table>
 
-      <button onClick={onAddRange}>Add Range</button>
-      <button onClick={onClickSave}>Save</button>
+      <Button className={"me-3"} variant="outline-primary" onClick={onAddRange}>
+        Add Range
+      </Button>
+      <Button onClick={onClickSave}>Save</Button>
     </div>
   );
 };
