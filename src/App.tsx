@@ -11,16 +11,15 @@ function App() {
   const [dimension, setDimension] = useState(200);
   const [generating, setGenerating] = useState<boolean>(true);
   const [heights, setHeights] = useState<Array<RangeColor>>([
-    { low: 0, high: 0.1, color: "#5C6F68" },
-    { low: 0.1, high: 0.2, color: "#BD2D87" },
-    { low: 0.2, high: 0.3, color: "#23FADE" },
-    { low: 0.3, high: 0.4, color: "#23FADE" },
-    { low: 0.4, high: 0.5, color: "#FABEAD" },
-    { low: 0.5, high: 0.6, color: "#B2C3D4" },
-    { low: 0.6, high: 0.7, color: "#ffda43" },
-    { low: 0.7, high: 0.8, color: "#aaee22" },
-    { low: 0.8, high: 0.9, color: "#64effe" },
-    { low: 0.9, high: 1, color: "#bbaa66" },
+    { low: 0, high: 0.1, color: "#05308d" },
+    { low: 0.1, high: 0.2, color: "#153e97" },
+
+    { low: 0.2, high: 0.3, color: "#0016ff" },
+    { low: 0.3, high: 0.4, color: "#FFF8DC" },
+    { low: 0.4, high: 0.5, color: "#DEB887" },
+    { low: 0.5, high: 0.8, color: "#0d980d" },
+    { low: 0.8, high: 0.9, color: "#8B4513" },
+    { low: 0.9, high: 1, color: "#ffffff" },
   ]);
 
   useEffect(() => {
@@ -37,13 +36,27 @@ function App() {
     });
   };
 
+  const download = () => {
+    const canvas = document.getElementsByTagName("canvas")[0];
+    const ctx = canvas?.getContext("2d");
+
+    if (ctx && canvas) {
+      let canvasUrl = canvas.toDataURL();
+      const createEl = document.createElement("a");
+      createEl.href = canvasUrl;
+      createEl.download = "map";
+      createEl.click();
+      createEl.remove();
+    }
+  };
+
   return (
     <Container>
-      <Row>
-        <Col>
-          <MapSizeSelector onRegenerate={(n) => regenerate(n)} />
-        </Col>
-      </Row>
+      <MapSizeSelector
+        onRegenerate={(n) => regenerate(n)}
+        onDownload={download}
+      />
+
       <Row className="justify-content-md-center">
         <Col xs={7} style={{ overflow: "auto" }}>
           <MapRenderer
