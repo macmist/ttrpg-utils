@@ -67,20 +67,14 @@ const MapRenderer = (props: MapRendererProps) => {
     const ctx = canvas?.getContext("2d", { alpha: false });
     if (ctx) {
       setRendering(true);
-      console.log("start render");
       ctx.fillStyle = "#000";
       ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       if (points) {
-        const maxPoint = 1024;
-        for (let start = 0; start < points.length; start += maxPoint) {}
-        if (points.length > 1024) {
-          points.forEach((point) => {
-            drawPixel(ctx, point);
-          });
-        }
+        points.forEach((point) => {
+          drawPixel(ctx, point);
+        });
       }
       setRendering(false);
-      console.log("finish");
     }
   }, [points, heightColors, drawPixel]);
 
