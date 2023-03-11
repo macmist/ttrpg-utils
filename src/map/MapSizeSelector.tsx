@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./map.css";
 
 interface MapSizeSelectorProps {
   onRegenerate?: (n: number) => void;
@@ -8,13 +9,13 @@ const range = (from: number, to: number, step: number) =>
 
 const MapSizeSelector = (props: MapSizeSelectorProps) => {
   const { onRegenerate } = props;
-  const [value, setValue] = useState<number>(1);
+  const [value, setValue] = useState<number>(9);
   const handleClick = () => {
     if (onRegenerate) onRegenerate(value);
   };
 
   return (
-    <>
+    <div className="mapSizeSelector">
       <select
         onChange={(e) => setValue(Number.parseInt(e.target.value))}
         defaultValue={value}
@@ -29,7 +30,7 @@ const MapSizeSelector = (props: MapSizeSelectorProps) => {
         })}
       </select>
       <button onClick={handleClick}>Re-generate</button>
-    </>
+    </div>
   );
 };
 

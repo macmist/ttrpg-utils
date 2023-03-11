@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { Point } from "../lib/types";
+import "./map.css";
 
 export interface RangeColor {
   low: number;
@@ -79,14 +80,14 @@ const MapRenderer = (props: MapRendererProps) => {
     }
   };
   return (
-    <>
+    <div className="mapContainer">
       <canvas
         ref={canvasRef}
         width={width || 200}
         height={height || 200}
       ></canvas>
       <button onClick={download}>Download</button>
-    </>
+    </div>
   );
 };
 

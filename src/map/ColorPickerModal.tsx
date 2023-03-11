@@ -1,4 +1,4 @@
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
@@ -12,9 +12,18 @@ const ColorPickerModal = (props: ColorPickerModalProps) => {
   const [currentColor, setCurrentColor] = useState<string>(color);
   return (
     <>
-      <Modal show={visible} onHide={() => onChange(currentColor)}>
-        <Modal.Body>
-          <HexColorPicker color={color} onChange={setCurrentColor} />
+      <Modal
+        show={visible}
+        onHide={() => onChange(currentColor)}
+        dialogClassName="colorPickerModal"
+      >
+        <Modal.Body style={{ width: "300px", alignSelf: "baseline" }}>
+          <HexColorPicker
+            className={"mb-3"}
+            color={color}
+            onChange={setCurrentColor}
+          />
+          <Button onClick={() => onChange(currentColor)}>Close</Button>
         </Modal.Body>
       </Modal>
     </>

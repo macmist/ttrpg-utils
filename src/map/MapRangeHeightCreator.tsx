@@ -1,7 +1,8 @@
 import { RangeColor } from "./MapRenderer";
 import { useState } from "react";
-import { Table } from "react-bootstrap";
+import { Col, FloatingLabel, Form, Row, Table } from "react-bootstrap";
 import ColorPickerModal from "./ColorPickerModal";
+import "./map.css";
 
 interface MapRangeHeightCreatorProps {
   heightColors?: Array<RangeColor>;
@@ -40,8 +41,8 @@ const MapRangeHeightCreator = (props: MapRangeHeightCreatorProps) => {
     setRanges(newRanges);
   };
   return (
-    <div>
-      <Table>
+    <div className="mapHeightContainer">
+      <Table size="sm">
         <thead>
           <tr>
             <th>Low</th>
@@ -52,48 +53,58 @@ const MapRangeHeightCreator = (props: MapRangeHeightCreatorProps) => {
         <tbody>
           {ranges &&
             ranges.map((range, index) => {
-              // setModalsVisibility([...modalsVisibility, false]);
               return (
                 <tr key={index}>
                   <td>
-                    <input
-                      type={"number"}
-                      value={range.low * 100}
-                      onChange={(e) =>
-                        onUpdateRange(index, "low", e.target.value)
-                      }
-                    />
+                    <FloatingLabel label={"low"}>
+                      <Form.Control
+                        type="number"
+                        value={range.low * 100}
+                        onChange={(event) =>
+                          onUpdateRange(index, "low", event.target.value)
+                        }
+                      ></Form.Control>
+                    </FloatingLabel>
                   </td>
                   <td>
-                    <input
-                      value={range.high * 100}
-                      onChange={(e) =>
-                        onUpdateRange(index, "high", e.target.value)
-                      }
-                    />
+                    <FloatingLabel label={"high"}>
+                      <Form.Control
+                        type="number"
+                        value={range.high * 100}
+                        onChange={(event) =>
+                          onUpdateRange(index, "high", event.target.value)
+                        }
+                      ></Form.Control>
+                    </FloatingLabel>
                   </td>
                   <td>
-                    <div
+                    <Row
                       onClick={() => {
                         updateModalVisibility(index, true);
                       }}
+                      className="justify-content-center align-items-center"
                     >
-                      <button
-                        style={{
-                          backgroundColor: range.color,
-                          display: "inline-block",
-                        }}
-                        disabled
-                      >
-                        {" "}
-                      </button>
+                      <Col sm={1}>
+                        <div
+                          style={{
+                            backgroundColor: range.color,
+                            width: "20px",
+                            height: "20px",
+                          }}
+                        ></div>
+                      </Col>
 
-                      <input
-                        style={{ display: "inline-block" }}
-                        value={range.color}
-                        disabled
-                      />
-                    </div>
+                      <Col>
+                        <FloatingLabel label={"color"}>
+                          <Form.Control
+                            type="text"
+                            value={range.color}
+                            disabled
+                            style={{ display: "inline-block" }}
+                          ></Form.Control>
+                        </FloatingLabel>
+                      </Col>
+                    </Row>
                     <ColorPickerModal
                       color={range.color}
                       onChange={(color) => {
